@@ -10,6 +10,9 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-orbitron: var(--font-orbitron);
+  --font-bebas: var(--font-bebas);
+  --font-rajdhani: var(--font-rajdhani);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +26,98 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Matrix/Glitch Effects for Option 6 */
+
+/* Glitch animation with clip-path for random slicing effect */
+@keyframes glitch-anim {
+  0% {
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    transform: translate(0);
+  }
+  20% {
+    clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+    transform: translate(-5px, 5px);
+  }
+  40% {
+    clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+    transform: translate(5px, -5px);
+  }
+  60% {
+    clip-path: polygon(0 80%, 100% 80%, 100% 95%, 0 95%);
+    transform: translate(-5px, 5px);
+  }
+  80% {
+    clip-path: polygon(0 10%, 100% 10%, 100% 30%, 0 30%);
+    transform: translate(5px, -5px);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: translate(0);
+  }
+}
+
+/* Simple glitch for smaller elements */
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(2px, 2px); }
+}
+
+/* Apply glitch animation */
+.glitch-active {
+  animation: glitch-anim 0.3s infinite;
+}
+
+.glitch {
+  animation: glitch 0.3s infinite;
+}
+
+/* RGB split text shadow for chromatic aberration effect */
+.glitch-text {
+  text-shadow:
+    2px 0 #ff0000,
+    -2px 0 #00ffff,
+    0 0 rgba(255, 255, 255, 0.8);
+}
+
+/* CRT Scanline effect */
+@keyframes scanline {
+  from { background-position: 0 0; }
+  to { background-position: 0 100%; }
+}
+
+.scanlines {
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 255, 0, 0.03) 50%
+  );
+  background-size: 100% 4px;
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+}
+
+.scanlines::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 2px;
+  pointer-events: none;
+}
+
+.scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+  pointer-events: none;
 }
