@@ -127,11 +127,11 @@ export function Option4Particles() {
           move: {
             enable: true,
             speed: stage === 'explode' ? { min: 8, max: 20 } : { min: 3, max: 8 },
-            direction: 'none',
+            direction: 'none' as const,
             random: true,
             straight: false,
             outModes: {
-              default: 'bounce'
+              default: 'bounce' as const
             }
           }
         },
@@ -199,11 +199,11 @@ export function Option4Particles() {
           move: {
             enable: true,
             speed: stage === 'converge' ? 4 : 1,
-            direction: 'none',
+            direction: 'none' as const,
             random: false,
             straight: false,
             outModes: {
-              default: 'bounce'
+              default: 'bounce' as const
             },
             attract: {
               enable: true,

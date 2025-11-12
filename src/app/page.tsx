@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { Option1Orbital } from '@/components/option1-orbital'
@@ -44,7 +44,7 @@ const options = [
   { id: 'option7' as OptionId, label: '7. Lottie', component: Option7Lottie },
 ]
 
-export default function Home() {
+function HomeContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
 
@@ -114,5 +114,17 @@ export default function Home() {
         {ActiveComponent && <ActiveComponent key={key} />}
       </div>
     </main>
+  )
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    }>
+      <HomeContent />
+    </Suspense>
   )
 }
